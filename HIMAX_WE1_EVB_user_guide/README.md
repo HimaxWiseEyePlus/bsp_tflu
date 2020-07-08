@@ -28,7 +28,9 @@ HIMAX WE1 EVB includes Himax WE-I Plus MCU, image sensor and rich peripheral sup
   4.	3-Axis Accelerometer
   5.	RED LEDx1 and GREEN LED x1 
   6.	2.54mm Pitch Female Headers for GPIO and I2C
-  7.	Microphones (L/R) at back side  
+  7.	Microphones (L/R) at back side 
+
+  <a href="docs/HIMAX_WE1_EVB_board_sch.pdf" target="_blank">Board Schematic PDF</a>
 
 ## System Requirement
   - HIMAX WE1 EVB
@@ -58,7 +60,7 @@ HIMAX WE1 EVB includes Himax WE-I Plus MCU, image sensor and rich peripheral sup
   ![alt text](images/teraterm_xmodem_support.png)
 
   - Minicom will extra install "lrzsz" package to support xmodem protocol  
-  ![alt text](images/minicom_xmodem_support.png)
+  ![alt text](images/minicom_xmodem_support_eng.png)
 
 
 ## Flash Image Update

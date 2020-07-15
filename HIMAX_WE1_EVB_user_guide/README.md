@@ -16,6 +16,8 @@ HIMAX WE1 EVB includes Himax WE-I Plus MCU, image sensor and rich peripheral sup
   - [TensorFlow Lite for Microcontroller example](#tensorflow-lite-for-microcontroller-example)
     - [TFLM Example Hello World](#tflm-example-hello-world)
     - [TFLM Example Person Detection INT8](#tflm-example-person-detection-int8)
+    - [TFLM Example Micro Speech INT8](#tflm-example-micro-speech-int8)
+    - [TFLM Example Magic Wand](#tflm-example-magic-wand)
 
 
 ## HIMAX WE1 EVB
@@ -123,14 +125,15 @@ HIMAX WE1 EVB includes Himax WE-I Plus MCU, image sensor and rich peripheral sup
 
   - [TFLM example - hello world](#tflm-example-hello-world)
   - [TFLM example - person detection INT8](#tflm-example-person-detection-int8)
-
+  - [TFLM Example Micro Speech INT8](#tflm-example-micro-speech-int8)
+  - [TFLM Example Magic Wand](#tflm-example-magic-wand)
 
 ### TFLM Example Hello World
 
   To generate hello world example flash binary for HIMAX WE1 EVB:
   1. Based on the flow of [hello world example](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/hello_world#hello-world-example) to generate flash image. 
   2. Download image binary to HIMAX WE1 EVB, detail steps can be found at [flash image update](#flash-image-update).
-  3. hello world example message will be shown on the terminal application 
+  3. Hello world example message will be shown on the terminal application. 
 
 ![alt text](images/tflm_example_hello_world.png)
 
@@ -139,7 +142,7 @@ HIMAX WE1 EVB includes Himax WE-I Plus MCU, image sensor and rich peripheral sup
   To generate person detection example flash binary for HIMAX WE1 EVB:
   1. Based on the flow of [person detection example](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/person_detection_experimental#person-detection-example) to generate flash image. 
   2. Download image binary to HIMAX WE1 EVB, detail steps can be found at [flash image update](#flash-image-update).
-  3. person detection example message will be shown on the terminal application 
+  3. Person detection example message will be shown on the terminal application. 
 
 ![alt text](images/tflm_example_person_detection_int8.png)
 
@@ -147,4 +150,36 @@ HIMAX WE1 EVB includes Himax WE-I Plus MCU, image sensor and rich peripheral sup
 
 ![alt text](images/tflm_example_person_detection_int8_led.png)
 
+### TFLM Example Micro Speech INT8
 
+  To generate micro speech example flash binary for HIMAX WE1 EVB:
+  1. Based on the flow of [micro speech example](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/micro_speech#micro-speech-example) to generate flash image. 
+  2. Download image binary to HIMAX WE1 EVB, detail steps can be found at [flash image update](#flash-image-update).
+  3. Micro speech example message will be shown on the terminal application with LED flickering. 
+
+```
+    Heard yes (206) @1700ms
+    Heard no (201) @4800ms
+    Heard unknown (202) @8200ms
+    Heard yes (205) @11600ms
+```
+   ![Animation on Himax WE1 EVB](images/tflm_example_micro_speech_int8_led.gif)
+
+### TFLM Example Magic Wand
+
+  To generate magic wand example flash binary for HIMAX WE1 EVB:
+  1. Based on the flow of [magic wand example](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/magic_wand#magic-wand-example) to generate flash image. 
+  2. Download image binary to HIMAX WE1 EVB, detail steps can be found at [flash image update](#flash-image-update).
+  3. Magic wand example message will be shown on the terminal application. 
+  4. There are 3 gestures supported in magic wand example. 
+   
+   ![gesture wing](images/tflm_example_magic_wand_wing.png)
+   ![gesture slope](images/tflm_example_magic_wand_slope.png)
+   ![gesture ring](images/tflm_example_magic_wand_ring.png)
+  
+  5. To get better accuracy for retrieve correct gesture on HIMAX WE1 EVB, tweak parameters in constants.h may helps. Following are the setting we test during the example.
+    
+   ![parameter setting](images/tflm_example_magic_wand_setting.png)
+
+
+   

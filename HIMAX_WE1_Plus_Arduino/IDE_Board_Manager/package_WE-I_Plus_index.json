@@ -1,0 +1,61 @@
+{
+  "packages": 
+  [{
+      "name": "WE-I Plus Boards",
+      "maintainer": "HIMAX",
+      "websiteURL": "https://www.himax.com.tw/company/about-himax/",
+      "email": "hans_chou@himax.com.tw",
+      "platforms": 
+      [{ 
+          "name": "WE-I Plus Boards",
+          "architecture": "WE-I",
+          "version": "1.0.0",
+          "category": "WE-I EVB",
+          "url": "https://www.himax.com.tw/we-i/arduino/WE-I_1.0.0.zip",
+          "archiveFileName": "WE-I_1.0.0.zip",
+          "size": "1164151",
+          "checksum": "SHA-256:6e417b515057d7da79b00d2eab6f2bd9f47a12fb3e9aa66293404c8bf8637c46",
+          "boards": [{"name": "WE-I EVB"}],
+          "toolsDependencies": 
+          [{
+            "packager": "WE-I Plus Boards",
+            "version": "3.7.1-embed",
+            "name": "python3"
+          }]
+      }],
+      "tools":
+      [{
+         "version": "3.7.1-embed",
+         "name": "python3",
+         "systems": 
+         [{
+            "host": "x86_64-mingw32",
+            "url": "https://www.himax.com.tw/we-i/arduino/python-3.7.1-embed-amd64.zip",
+            "archiveFileName": "python-3.7.1-embed-amd64.zip",
+            "checksum": "SHA-256:b9be270e6184606f09cde0604dd2e83d39e71b32a617a144f5dade1fc5fc106d",
+            "size": "6754047"
+          },
+          {
+            "host": "i686-mingw32",
+            "url": "https://www.himax.com.tw/we-i/arduino/python-3.7.1-embed-win32.zip",
+            "archiveFileName": "python-3.7.1-embed-win32.zip",
+            "checksum": "SHA-256:d41a38a9f7d0dbdc7ed6ddf2e453f987a402cb408f3878ce2431d2c6a7d2a06f",
+            "size": "6270854"
+          },
+          {
+            "host": "i686-pc-linux-gnu",
+            "url": "https://www.himax.com.tw/we-i/arduino/python3-via-env.tar.gz",
+            "archiveFileName": "python3-via-env.tar.gz",
+            "checksum": "SHA-256:b3c9ae912477d833809b4b50c3db6d1e58f12702e65ee049c17a293f92657aa9",
+            "size": "258"
+          },
+          {    
+              "host": "x86_64-pc-linux-gnu",
+              "url": "https://www.himax.com.tw/we-i/arduino/python3-via-env.tar.gz",
+              "archiveFileName": "python3-via-env.tar.gz",
+              "checksum": "SHA-256:b3c9ae912477d833809b4b50c3db6d1e58f12702e65ee049c17a293f92657aa9",
+              "size": "258"
+          }]
+      }]
+  }]
+}

@@ -3,8 +3,11 @@
   [{
       "name": "WE-I Plus Boards",
       "maintainer": "HIMAX",
-      "websiteURL": "https://www.himax.com.tw/company/about-himax/",
-      "email": "hans_chou@himax.com.tw",
+      "websiteURL": "https://github.com/HimaxWiseEyePlus/bsp_tflu/tree/master/HIMAX_WE1_EVB_user_guide",
+      "help": 
+      {
+        "online": "https://www.himax.com.tw/products/intelligent-sensing/always-on-smart-sensing/inquiry-form/"
+      },
       "platforms": 
       [{ 
           "name": "WE-I Plus Boards",

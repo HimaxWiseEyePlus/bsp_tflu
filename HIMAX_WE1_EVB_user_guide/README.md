@@ -1,6 +1,8 @@
 # HIMAX WE1 EVB USER GUIDE
 
-HIMAX WE1 EVB includes Himax WE-I Plus MCU, image sensor and rich peripheral supports. The details are given in the following paragraph.  
+HIMAX WE1 EVB includes Himax WE-I Plus MCU, image sensor and rich peripheral supports. The details are given in the following paragraph. 
+
+HIMAX WE1 EVB now supports to program with Arduino, more details can be found [here](https://github.com/HimaxWiseEyePlus/bsp_tflu/tree/master/HIMAX_WE1_Plus_Arduino#--programming-the-himax-we1-evb-with-arduino--)  
 
 
 ## Table of contents

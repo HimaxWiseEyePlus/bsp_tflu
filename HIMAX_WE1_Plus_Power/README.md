@@ -13,4 +13,4 @@ We deployed person detection model with Synopsys MLI optimized kernels on WE-I P
 
 The model inference time is `35ms`. The measured average power is just `2.5mW` per frame per second, including WE-I Plus ASIC and `HM0360` sensor.
 
-![person_detect](images/person_detect.png)
+[![person_detect](images/person_detect.png)](https://www.youtube.com/watch?v=DQQWAPrrWlE "person_detect - Click to Watch!")

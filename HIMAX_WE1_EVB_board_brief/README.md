@@ -2,7 +2,7 @@
 
 This document contains the general information of HIMAX WE1 EVB.
 
-![alt text](images/himax_we1_evb_white.png "Logo example")
+![alt text](images/himax_we1_evb_white.png)
 ======
 
 <span style="color:red;"> (Board size: 40mm x 27mm) </span>  

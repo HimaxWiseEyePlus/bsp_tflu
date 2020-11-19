@@ -15,6 +15,7 @@ HIMAX WE1 EVB now supports to program with Arduino, more details can be found [h
   - [Flash Image Update](#flash-image-update)
     - [Flash Image Update at Windows Environment](#flash-image-update-at-windows-environment)
     - [Flash Image Update at Linux Environment](#flash-image-update-at-linux-environment)
+    - [Flash Tool Update at Linux Environment](#flash-tool-update-at-linux-environment)
   - [TensorFlow Lite for Microcontroller example](#tensorflow-lite-for-microcontroller-example)
     - [TFLM Example Hello World](#tflm-example-hello-world)
     - [TFLM Example Person Detection INT8](#tflm-example-person-detection-int8)
@@ -69,13 +70,17 @@ HIMAX WE1 EVB now supports to program with Arduino, more details can be found [h
 
 ## Flash Image Update
 
+Flash update is available via serial terminal at Windows and Linux environment.
   - [Update Flash image at Windows Environment](#flash-image-update-at-windows-environment)
   - [Update Flash image at Linux Environment](#flash-image-update-at-linux-environment)
+
+once the flash image is larger than 1MB, please consider using flash tool to update image
+   - [Update Flash image using Flash tool at Linux Environment](#flash-tool-update-at-linux-environment)
 
 ### Flash Image Update at Windows Environment
 
 1. Open TeraTerm and select `File -> New connection`, connect to HIMAX WE1 EVB.
-2. Reset WE1 EVB by press reset button, then press any keyboard key (except `enter` key) in 0.3 sec. boot option will be displayed.
+2. Reset HIMAX WE1 EVB by press reset button, then press any keyboard key (except `enter` key) in 0.3 sec. boot option will be displayed.
 
 ![alt text](images/teraterm_boot_menu.png)
 
@@ -122,6 +127,38 @@ HIMAX WE1 EVB now supports to program with Arduino, more details can be found [h
 ![alt text](images/minicom_upload_file_done.png)
 
 10. Press reset button after "burn application done" message displayed.
+
+### Flash Tool Update at Linux Environment
+
+1. Download FT4222 linux driver [here](https://www.ftdichip.com/Support/SoftwareExamples/libft4222-linux-1.4.4.9.tgz).
+2. Type `install4222.sh` to install FT4222 driver.
+3. Assign access right to usb device, go to deirectory 
+
+    ```
+    cd /etc/udev/rules.d/
+    ```
+
+    create file with naming `99-ftdi.rules`, fill following data in file
+
+    ```
+    # FTDI's ft4222 USB-I2C Adapter
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="601c", GROUP="plugdev", MODE="0666"
+    ```
+
+4. Download Flash tool [here](https://github.com/HimaxWiseEyePlus/bsp_tflu/releases/download/v1.0/FlashTool.zip) and unzip it.
+5. Copy flash image to FlashTool directory.
+6. Connect HIMAX WE1 EVB via USB.
+7. Make sure there is no serial terminal connect to HIMAX WE1 EVB
+8. Type following command to start update flash image
+   
+    ```
+    ./WE-I_ISP_Tool [image_name.img]
+    ```
+         
+9. For example, download tflm example flash image `person_detection_int8.img` to flash
+
+![alt text](images/FlashTool_update_image.png)
+
 
 ## TensorFlow Lite for Microcontroller example 
 

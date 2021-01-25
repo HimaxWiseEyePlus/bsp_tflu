@@ -127,14 +127,13 @@ You can see the generated application flash image name with suffix "_0.img", "_1
 
 ![version v1.4.4, support multiple images update](images/bootloader_v1_4_4.png)
 
-13. You can then Download application to flash by following steps.[(Windows)](#flash-image-update-at-windows-environment) [(Linux)](#flash-image-update-at-linux-environment). 
+13. You can then download application to flash by following steps.[(Windows)](#flash-image-update-at-windows-environment) [(Linux)](#flash-image-update-at-linux-environment). 
   
 ### Flash Image Update at Windows Environment
 
 1. Following steps update application in the flash.
 2. Open TeraTerm and select `File -> New connection`, connect to HIMAX WE1 EVB.
 3. Reset HIMAX WE1 EVB by press reset button, then press any keyboard key (except `enter` key) in 0.3 sec. boot option will be displayed.
-4. aa
 
 ![alt text](images/teraterm_boot_menu.png)
 

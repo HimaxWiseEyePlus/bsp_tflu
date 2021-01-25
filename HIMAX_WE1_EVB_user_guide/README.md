@@ -13,9 +13,10 @@ HIMAX WE1 EVB now supports to program with Arduino, more details can be found [h
   - [System Requirement](#system-requirement)
     - [Serial terminal emulation application Setting](#serial-terminal-emulation-application-setting)
   - [Flash Image Update](#flash-image-update)
+    - [Check Bootloader Version](#check-bootloader-version)
+    - [Update Bootloader Version at Linux Environment](#update-bootloader-version-at-linux-environment)
     - [Flash Image Update at Windows Environment](#flash-image-update-at-windows-environment)
     - [Flash Image Update at Linux Environment](#flash-image-update-at-linux-environment)
-    - [Flash Tool Update at Linux Environment](#flash-tool-update-at-linux-environment)
   - [TensorFlow Lite for Microcontroller example](#tensorflow-lite-for-microcontroller-example)
     - [TFLM Example Hello World](#tflm-example-hello-world)
     - [TFLM Example Person Detection INT8](#tflm-example-person-detection-int8)
@@ -70,41 +71,95 @@ HIMAX WE1 EVB now supports to program with Arduino, more details can be found [h
 
 ## Flash Image Update
 
-Flash update is available via serial terminal at Windows and Linux environment.
+There are bootloader and application in the flash, application update is available via serial terminal at Windows and Linux environment.
   - [Update Flash image at Windows Environment](#flash-image-update-at-windows-environment)
   - [Update Flash image at Linux Environment](#flash-image-update-at-linux-environment)
 
-once the flash image is larger than 1MB, please consider using flash tool to update image
-   - [Update Flash image using Flash tool at Linux Environment](#flash-tool-update-at-linux-environment)
+You can see the generated application flash image name with suffix "_0.img", "_1.img" if image size is larger than 1MB. To support multiple images update, please [check](#check-bootloader-version) and [update](#update-bootloader-version-at-linux-environment) HIMAX WE1 EVB bootloader to v1.4.4 or above. Current bootloader update tool only support Linux environment.
 
+### Check Bootloader Version
+
+1. open terminal at your environment
+2. Reset HIMAX WE1 EVB by press reset button, then press any keyboard key (except `enter` key) in 0.3 sec. 
+3. check version number displayed at terminal
+4. multiple images update is not supported for bootloader version lower than v1.4.4
+
+    `v1.4.2` - don't support multiple images update  
+    ![old version v1.4.2](images/bootloader_v1_4_2.png)
+
+    `v1.4.4` - support multiple images update  
+    ![version v1.4.4, support multiple images update](images/bootloader_v1_4_4.png)
+
+### Update Bootloader Version at Linux Environment
+
+1. Please notice that following steps will erase all data (bootloader and application) in the HIMAX WE1 EVB flash.
+2. Download FT4222 linux driver [here](https://www.ftdichip.com/Support/SoftwareExamples/libft4222-linux-1.4.4.9.tgz).
+3. Type `install4222.sh` to install FT4222 driver.
+4. Assign access right to usb device, go to deirectory 
+
+    ```
+    cd /etc/udev/rules.d/
+    ```
+
+    create file with naming `99-ftdi.rules`, fill following data in file
+
+    ```
+    # FTDI's ft4222 USB-I2C Adapter
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="601c", GROUP="plugdev", MODE="0666"
+    ```
+
+5. Download Flash tool [here](https://github.com/HimaxWiseEyePlus/bsp_tflu/releases/download/v1.0/FlashTool.zip) and unzip it.
+6. Download bootloader, current latest version is v1.4.4 [here](https://github.com/HimaxWiseEyePlus/bsp_tflu/releases/download/v1.0/himax_we1_bootloader_v1_4_4.bin). 
+7. Copy bootloader to FlashTool directory.
+8. Connect HIMAX WE1 EVB via USB cable.
+9. Make sure there is no serial terminal connect to HIMAX WE1 EVB
+10. Type following command to start update flash image
+   
+    ```
+    ./WE-I_ISP_Tool [bootloader name]
+    ```
+         
+11. For example, download bootloader  `himax_we1_bootloader_v1_4_4.bin` to flash
+
+![alt text](images/flash_tool_update_bootloader.png)
+
+12. After bootloader updated, you can double check the version by open terminal at your environment and press reset button on HIMAX WE1 EVB.
+
+![version v1.4.4, support multiple images update](images/bootloader_v1_4_4.png)
+
+13. You can then Download application to flash by following steps.[(Windows)](#flash-image-update-at-windows-environment) [(Linux)](#flash-image-update-at-linux-environment). 
+  
 ### Flash Image Update at Windows Environment
 
-1. Open TeraTerm and select `File -> New connection`, connect to HIMAX WE1 EVB.
-2. Reset HIMAX WE1 EVB by press reset button, then press any keyboard key (except `enter` key) in 0.3 sec. boot option will be displayed.
+1. Following steps update application in the flash.
+2. Open TeraTerm and select `File -> New connection`, connect to HIMAX WE1 EVB.
+3. Reset HIMAX WE1 EVB by press reset button, then press any keyboard key (except `enter` key) in 0.3 sec. boot option will be displayed.
+4. aa
 
 ![alt text](images/teraterm_boot_menu.png)
 
-3. Press button `1` and WE1 EVB will enter receiving mode after then. Select target flash image by `File->Transfer->XMODEM->Send`.
+4. Press button `1` and HIMAX WE1 EVB will enter receiving mode after then. Select target flash image by `File->Transfer->XMODEM->Send`. Please start from file name with suffix "_0.img" and then "_1.img" if multiple images. 
 
 ![alt text](images/teraterm_xmodem_downloading.png)
 
-4. Press reset button after "burn application done" message displayed.
+5. After "burn application done" message displayed, select next file for update or press reset button to restart.
 
 ### Flash Image Update at Linux Environment
 
-1. connect HIMAX WE1 EVB with micro usb cable, check device ID by typing  
+1. Following steps update application in the flash.
+2. connect HIMAX WE1 EVB with micro usb cable, check device ID by typing  
 
     ```
      ls /sys/bus/usb-serial/devices/ -ltrah
     ``` 
     
-2. Open minicom by typing
+3. Open minicom by typing
     
     ```
     sudo minicom -s
     ```   
   
-3. Select `Serial port Setup`, make sure `A - Serial Device` select correct device and `E - Bps/Par/Bits` set to correct value.   
+4. Select `Serial port Setup`, make sure `A - Serial Device` select correct device and `E - Bps/Par/Bits` set to correct value.   
 
 ![alt text](images/minicom_serial_port_setup.png)  
 
@@ -118,46 +173,17 @@ once the flash image is larger than 1MB, please consider using flash tool to upd
 
 ![alt text](images/minicom_upload_menu.png)
 
-8. Fill target flash image path and image name.
+8. Fill target flash image path and image name. Please start from file name with suffix "_0.img" and then "_1.img" if multiple images. 
 
-![alt text](images/minicom_upload_file_selection_image.png)
+![alt text](images/minicom_upload_multiple_files_0.png)
 
 9. Press any key after transfer done.
 
 ![alt text](images/minicom_upload_file_done.png)
 
-10. Press reset button after "burn application done" message displayed.
+10. After "burn application done" message displayed on th console, back to step 6 and select another flash image or press reset button to restart.
 
-### Flash Tool Update at Linux Environment
-
-1. Download FT4222 linux driver [here](https://www.ftdichip.com/Support/SoftwareExamples/libft4222-linux-1.4.4.9.tgz).
-2. Type `install4222.sh` to install FT4222 driver.
-3. Assign access right to usb device, go to deirectory 
-
-    ```
-    cd /etc/udev/rules.d/
-    ```
-
-    create file with naming `99-ftdi.rules`, fill following data in file
-
-    ```
-    # FTDI's ft4222 USB-I2C Adapter
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="601c", GROUP="plugdev", MODE="0666"
-    ```
-
-4. Download Flash tool [here](https://github.com/HimaxWiseEyePlus/bsp_tflu/releases/download/v1.0/FlashTool.zip) and unzip it.
-5. Copy flash image to FlashTool directory.
-6. Connect HIMAX WE1 EVB via USB.
-7. Make sure there is no serial terminal connect to HIMAX WE1 EVB
-8. Type following command to start update flash image
-   
-    ```
-    ./WE-I_ISP_Tool [image_name.img]
-    ```
-         
-9. For example, download tflm example flash image `person_detection_int8.img` to flash
-
-![alt text](images/FlashTool_update_image.png)
+![alt text](images/minicom_burn_file_done.png)    
 
 
 ## TensorFlow Lite for Microcontroller example 

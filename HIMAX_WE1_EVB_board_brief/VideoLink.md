@@ -1,4 +1,4 @@
-# <span style="color:lightblue;">  Related Video demo link of HIMAX WE-1 Plus  </span> 
+# <span style="color:lightblue;">  Related Video demo link of HIMAX WE1 EVB  </span> 
 
 
 ## Google TFLu Person Detection example

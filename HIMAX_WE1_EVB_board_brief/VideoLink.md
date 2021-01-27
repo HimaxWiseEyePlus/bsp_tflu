@@ -1,4 +1,15 @@
-# <span style="color:lightblue;">  Related Video demo link of HIMAX WE1 EVB  </span> 
+# <span style="color:lightblue;">  Related Video demo link about HIMAX WE1 EVB  </span> 
+
+## Table of contents
+
+- Demo Videos
+  - [Google TFLu Person Detection example](#google-tflu-person-detection-example)
+  - [Google TFLu Micro Speech example](#google-tflu-micro-speech-example)
+  - [Google TFLu Magic Wand example](#google-tflu-magic-wand-example)
+  - [Himax Person Detection with bounding box](#himax-person-detection-with-bounding-box)
+
+- Webinars
+  - [Edge Impulse/Himax Webinar](#edge-impulsehimax-webinar)
 
 
 ## Google TFLu Person Detection example

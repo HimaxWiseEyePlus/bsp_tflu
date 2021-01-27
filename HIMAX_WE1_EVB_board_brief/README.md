@@ -38,5 +38,9 @@ This document contains the general information of HIMAX WE1 EVB.
 - Flash programming
 - Output message
 
+## Video demo lonk
+
+Please check [here](https://github.com/HimaxWiseEyePlus/bsp_tflu/blob/master/HIMAX_WE1_EVB_board_brief/VideoLink.md) for more video demo example
+
 You can access [Here](https://www.himax.com.tw/products/intelligent-sensing/always-on-smart-sensing/) for more information
 and conatact [Himax](https://www.himax.com.tw/products/intelligent-sensing/always-on-smart-sensing/inquiry-form/)

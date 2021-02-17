@@ -21,7 +21,7 @@ RM = rm -rf
 DL = curl -Ls -f
 UNZIP = unzip 
 
-SDK_LINK = https://www.himax.com.tw/we-i/himax_we1_sdk_v15.zip
+SDK_LINK = https://www.himax.com.tw/we-i/himax_we1_sdk_v16.zip
 SDK_LOC = .
 SDK_NAME = sdk.zip
 
@@ -51,6 +51,15 @@ scenario_app/qwiic_ccs811_bme280/main.cc \
 qwiic_ms8607_SRCS := \
 scenario_app/qwiic_ms8607/main.cc \
 
+qwiic_ms8607_sparkfun_SRCS := \
+scenario_app/qwiic_ms8607/sparkfun/SparkFun_PHT_MS8607_Arduino_Library.cc \
+scenario_app/qwiic_ms8607/sparkfun/main.cc \
+
+qwiic_ccs811_bme280_sparkfun_SRCS := \
+scenario_app/qwiic_ccs811_bme280/sparkfun/SparkFunBME280.cc \
+scenario_app/qwiic_ccs811_bme280/sparkfun/SparkFunCCS811.cc \
+scenario_app/qwiic_ccs811_bme280/sparkfun/main.cc \
+
 OBJS := \
 $(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(SRCS)))
 
@@ -60,23 +69,27 @@ $(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(qwiic_ccs811_bme280_SRCS)))
 qwiic_ms8607_OBJS := \
 $(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(qwiic_ms8607_SRCS)))
 
+qwiic_ms8607_sparkfun_OBJS := \
+$(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(qwiic_ms8607_sparkfun_SRCS)))
+
+qwiic_ccs811_bme280_sparkfun_OBJS := \
+$(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(qwiic_ccs811_bme280_sparkfun_SRCS)))
+
 #=============================================================
 # Applications settings
 #=============================================================
 
 DEPEND_PATH = third_party/mw_gnu_dependencies/gnu_depend_lib
 SDK_PATH = himax_we1_sdk
+LIB_PATH = lib
 
 ifeq ($(ARC_TOOLCHAIN), mwdt)
 CXXFLAGS+= \
 -Wstrict-aliasing \
 -DTF_LITE_STATIC_MEMORY \
--Werror \
 -Wsign-compare \
 -Wdouble-promotion \
 -Wshadow \
--Wunused-variable \
--Wmissing-field-initializers \
 -Wunused-function \
 -DNDEBUG \
 -O3 \
@@ -97,6 +110,7 @@ CXXFLAGS+= \
 -tcf_core_config \
 -I. \
 -I./$(SDK_PATH) \
+-I./$(LIB_PATH) \
 
 
 CCFLAGS+= \
@@ -118,6 +132,7 @@ CCFLAGS+= \
 -tcf_core_config \
 -I. \
 -I. $(SDK_PATH)\
+-I. $(LIB_PATH) \
 
 LDFLAGS+= \
 -Hheap=8192 \
@@ -173,6 +188,7 @@ CXXFLAGS += \
 -mfpu=fpus_all \
 -I. \
 -I./$(SDK_PATH) \
+-I./$(LIB_PATH) \
 -DSCRATCH_MEM_Z_SIZE=0x10000 \
 
 
@@ -198,6 +214,7 @@ CCFLAGS+= \
 -include $(SDK_PATH)/core_config.h \
 -I. \
 -I./$(SDK_PATH) \
+-I./$(LIB_PATH) \
 
 LDFLAGS +=  -Wl,-lmwdepend -Wl,-marcv2elfx -Wl,-Map=memory.map -Wl,--strip-debug -Wl,--stats,--gc-sections -Wl,--cref \
 -L$(DEPEND_PATH) \
@@ -246,10 +263,21 @@ qwiic_ms8607: qwiic_ms8607.elf
 qwiic_ms8607.elf : $(OBJS) $(qwiic_ms8607_OBJS) 
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(qwiic_ms8607_OBJS) $(LDFLAGS)
 
+qwiic_ccs811_bme280_sparkfun: MAP_NAME = qwiic_ccs811_bme280_sparkfun
+qwiic_ccs811_bme280_sparkfun: qwiic_ccs811_bme280_sparkfun.elf
+
+qwiic_ccs811_bme280_sparkfun.elf : $(OBJS) $(qwiic_ccs811_bme280_sparkfun_OBJS) 
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(qwiic_ccs811_bme280_sparkfun_OBJS) $(LDFLAGS)
+
+qwiic_ms8607_sparkfun: MAP_NAME = qwiic_ms8607_sparkfun
+qwiic_ms8607_sparkfun: qwiic_ms8607_sparkfun.elf
+
+qwiic_ms8607_sparkfun.elf : $(OBJS) $(qwiic_ms8607_sparkfun_OBJS) 
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(qwiic_ms8607_sparkfun_OBJS) $(LDFLAGS)
 		
 clean:
 	@echo 'cleaning'
-	-@$(RM) $(OBJS) $(qwiic_ccs811_bme280_OBJS) $(qwiic_ms8607_OBJS) 
+	-@$(RM) $(OBJS) $(qwiic_ccs811_bme280_OBJS) $(qwiic_ms8607_OBJS) ${qwiic_ms8607_sparkfun_OBJS} ${qwiic_ccs811_bme280_sparkfun_OBJS}
 	-@$(RM) *.elf
 	-@$(RM) *.map
 	

@@ -20,8 +20,9 @@ endif
 RM = rm -rf
 DL = curl -Ls -f
 UNZIP = unzip 
+CP = cp -r
 
-SDK_LINK = https://www.himax.com.tw/we-i/himax_we1_sdk_v16.zip
+SDK_LINK = https://www.himax.com.tw/we-i/himax_we1_sdk_v17.zip
 SDK_LOC = .
 SDK_NAME = sdk.zip
 
@@ -30,8 +31,20 @@ TOOL_LOC = .
 TOOL_NAME = image_gen.zip
 
 DEPEND_LINK = https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_mli/releases/download/Release_1.1/mw_gnu_dependencies.zip
-DEPEND_LOC = third_party/
+DEPEND_LOC =  third_party/
 DEPEND_NAME = gnu_dependencies.zip
+
+TF_LINK = https://github.com/HimaxWiseEyePlus/himax_tflm/archive/master.zip
+TF_LOC = ./
+TF_NAME = himax_tflm.zip
+
+MODEL_LINK = https://www.himax.com.tw/we-i/himax_tflu_tree/model_setting_v02.zip
+MODEL_LOC = tensorflow/lite/micro/tools/make/downloads/
+MODEL_NAME = model.zip
+
+LIB_LINK = https://www.himax.com.tw/we-i/himax_tflu_tree/thrid_party_lib_v01.zip
+LIB_LOC = third_party/
+LIB_NAME = lib.zip
 
 GEN_TOOL_DIR = image_gen_linux
 ifeq ($(ARC_TOOLCHAIN), mwdt)
@@ -43,7 +56,83 @@ endif
 # Files and directories
 #=============================================================
 
-SRCS := \
+TFSRCS := \
+tensorflow/lite/micro/micro_interpreter.cc \
+tensorflow/lite/micro/all_ops_resolver.cc \
+tensorflow/lite/micro/simple_memory_allocator.cc \
+tensorflow/lite/micro/memory_helpers.cc \
+tensorflow/lite/micro/recording_micro_allocator.cc \
+tensorflow/lite/micro/micro_error_reporter.cc \
+tensorflow/lite/micro/micro_time.cc \
+tensorflow/lite/micro/recording_simple_memory_allocator.cc \
+tensorflow/lite/micro/micro_string.cc \
+tensorflow/lite/micro/micro_profiler.cc \
+tensorflow/lite/micro/micro_utils.cc \
+tensorflow/lite/micro/himax_we1_evb/debug_log.cc \
+tensorflow/lite/micro/micro_optional_debug_tools.cc \
+tensorflow/lite/micro/test_helpers.cc \
+tensorflow/lite/micro/micro_allocator.cc \
+tensorflow/lite/micro/benchmarks/keyword_scrambled_model_data.cc \
+tensorflow/lite/micro/kernels/logistic.cc \
+tensorflow/lite/micro/kernels/arc_mli/conv.cc \
+tensorflow/lite/micro/kernels/prelu.cc \
+tensorflow/lite/micro/kernels/dequantize.cc \
+tensorflow/lite/micro/kernels/l2norm.cc \
+tensorflow/lite/micro/kernels/resize_nearest_neighbor.cc \
+tensorflow/lite/micro/kernels/tanh.cc \
+tensorflow/lite/micro/kernels/activations.cc \
+tensorflow/lite/micro/kernels/arg_min_max.cc \
+tensorflow/lite/micro/kernels/pad.cc \
+tensorflow/lite/micro/kernels/reduce.cc \
+tensorflow/lite/micro/kernels/unpack.cc \
+tensorflow/lite/micro/kernels/sub.cc \
+tensorflow/lite/micro/kernels/add.cc \
+tensorflow/lite/micro/kernels/split.cc \
+tensorflow/lite/micro/kernels/circular_buffer.cc \
+tensorflow/lite/micro/kernels/kernel_runner.cc \
+tensorflow/lite/micro/kernels/floor.cc \
+tensorflow/lite/micro/kernels/round.cc \
+tensorflow/lite/micro/kernels/ceil.cc \
+tensorflow/lite/micro/kernels/svdf.cc \
+tensorflow/lite/micro/kernels/hard_swish.cc \
+tensorflow/lite/micro/kernels/arc_mli/pooling.cc \
+tensorflow/lite/micro/kernels/concatenation.cc \
+tensorflow/lite/micro/kernels/neg.cc \
+tensorflow/lite/micro/kernels/quantize.cc \
+tensorflow/lite/micro/kernels/ethosu.cc \
+tensorflow/lite/micro/kernels/mul.cc \
+tensorflow/lite/micro/kernels/maximum_minimum.cc \
+tensorflow/lite/micro/kernels/reshape.cc \
+tensorflow/lite/micro/kernels/strided_slice.cc \
+tensorflow/lite/micro/kernels/softmax.cc \
+tensorflow/lite/micro/kernels/pack.cc \
+tensorflow/lite/micro/kernels/kernel_util.cc \
+tensorflow/lite/micro/kernels/logical.cc \
+tensorflow/lite/micro/kernels/elementwise.cc \
+tensorflow/lite/micro/kernels/comparisons.cc \
+tensorflow/lite/micro/kernels/arc_mli/fully_connected.cc \
+tensorflow/lite/micro/kernels/arc_mli/depthwise_conv.cc \
+tensorflow/lite/micro/memory_planner/linear_memory_planner.cc \
+tensorflow/lite/micro/memory_planner/greedy_memory_planner.cc \
+tensorflow/lite/micro/testing/test_conv_model.cc \
+tensorflow/lite/c/common.c \
+tensorflow/lite/core/api/error_reporter.cc \
+tensorflow/lite/core/api/flatbuffer_conversions.cc \
+tensorflow/lite/core/api/op_resolver.cc \
+tensorflow/lite/core/api/tensor_utils.cc \
+tensorflow/lite/kernels/internal/quantization_util.cc \
+tensorflow/lite/kernels/kernel_util.cc \
+tensorflow/lite/micro/testing/test_utils.cc
+
+LORA_SRCS := \
+tensorflow/lite/micro/kernels/arc_mli/scratch_buffers.cc \
+tensorflow/lite/micro/kernels/arc_mli/scratch_buf_mgr.cc \
+tensorflow/lite/micro/kernels/arc_mli/mli_slicers.cc \
+tensorflow/lite/micro/examples/person_detection_experimental/himax_we1_evb/image_provider.cc \
+tensorflow/lite/micro/examples/person_detection_experimental/model_settings.cc \
+scenario_app/lora/main.cc \
+scenario_app/lora/main_functions.cc \
+tensorflow/lite/micro/tools/make/downloads/person_model_int8/person_detect_model_data.cc
 
 qwiic_ccs811_bme280_SRCS := \
 scenario_app/qwiic_ccs811_bme280/main.cc \
@@ -60,8 +149,8 @@ scenario_app/qwiic_ccs811_bme280/sparkfun/SparkFunBME280.cc \
 scenario_app/qwiic_ccs811_bme280/sparkfun/SparkFunCCS811.cc \
 scenario_app/qwiic_ccs811_bme280/sparkfun/main.cc \
 
-OBJS := \
-$(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(SRCS)))
+TFOBJS := \
+$(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(TFSRCS)))
 
 qwiic_ccs811_bme280_OBJS := \
 $(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(qwiic_ccs811_bme280_SRCS)))
@@ -75,10 +164,14 @@ $(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(qwiic_ms8607_sparkfun_SRCS)))
 qwiic_ccs811_bme280_sparkfun_OBJS := \
 $(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(qwiic_ccs811_bme280_sparkfun_SRCS)))
 
+LORA_OBJS := \
+$(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(LORA_SRCS)))
+
 #=============================================================
 # Applications settings
 #=============================================================
 
+MLI_PATH = third_party/arc_mli_package/bin/himax_arcem9d_r16/release
 DEPEND_PATH = third_party/mw_gnu_dependencies/gnu_depend_lib
 SDK_PATH = himax_we1_sdk
 LIB_PATH = lib
@@ -111,6 +204,12 @@ CXXFLAGS+= \
 -I. \
 -I./$(SDK_PATH) \
 -I./$(LIB_PATH) \
+-I./third_party/gemmlowp \
+-I./third_party/flatbuffers/include \
+-I./third_party/ruy \
+-I./third_party/arc_mli_package/include \
+-I./third_party/arc_mli_package/include/api \
+-I./tensorflow/lite/micro/tools/make/downloads/kissfft
 
 
 CCFLAGS+= \
@@ -133,14 +232,22 @@ CCFLAGS+= \
 -I. \
 -I. $(SDK_PATH)\
 -I. $(LIB_PATH) \
+-I./third_party/gemmlowp \
+-I./third_party/flatbuffers/include \
+-I./third_party/ruy \
+-I./third_party/arc_mli_package/include \
+-I./third_party/arc_mli_package/include/api \
+-I./tensorflow/lite/micro/tools/make/downloads/kissfft
 
 LDFLAGS+= \
+$(MLI_PATH)/libmli.a \
 -Hheap=8192 \
 -Hnocopyr \
 -m \
 -Hldopt=-Coutput=$(MAP_NAME).map \
-$(SDK_PATH)/memory.lcf \
+memory.lcf \
 -Hldopt=-Bgrouplib \
+$(SDK_PATH)/libboard_open_socket.a \
 $(SDK_PATH)/libcpuarc.a \
 $(SDK_PATH)/libbss.a \
 $(SDK_PATH)/libboard_socket.a \
@@ -189,6 +296,12 @@ CXXFLAGS += \
 -I. \
 -I./$(SDK_PATH) \
 -I./$(LIB_PATH) \
+-I./third_party/gemmlowp \
+-I./third_party/flatbuffers/include \
+-I./third_party/ruy \
+-I./third_party/arc_mli_package/include \
+-I./third_party/arc_mli_package/include/api \
+-I./tensorflow/lite/micro/tools/make/downloads/kissfft \
 -DSCRATCH_MEM_Z_SIZE=0x10000 \
 
 
@@ -215,11 +328,19 @@ CCFLAGS+= \
 -I. \
 -I./$(SDK_PATH) \
 -I./$(LIB_PATH) \
+-I./third_party/gemmlowp \
+-I./third_party/flatbuffers/include \
+-I./third_party/ruy \
+-I./third_party/arc_mli_package/include \
+-I./third_party/arc_mli_package/include/api \
+-I./tensorflow/lite/micro/tools/make/downloads/kissfft \
 
-LDFLAGS +=  -Wl,-lmwdepend -Wl,-marcv2elfx -Wl,-Map=memory.map -Wl,--strip-debug -Wl,--stats,--gc-sections -Wl,--cref \
+LDFLAGS +=  -Wl,-lmli -Wl,-lmwdepend -Wl,-marcv2elfx -Wl,-Map=memory.map -Wl,--strip-debug -Wl,--stats,--gc-sections -Wl,--cref \
+-L$(MLI_PATH) \
 -L$(DEPEND_PATH) \
--L$(SDK_PATH) \
+-L. \
 -Wl,--start-group \
+$(SDK_PATH)/libboard_open_socket.a \
 $(SDK_PATH)/libcpuarc.a \
 $(SDK_PATH)/libbss.a \
 $(SDK_PATH)/libboard_socket.a \
@@ -254,47 +375,63 @@ all:
 qwiic_ccs811_bme280: MAP_NAME = qwiic_ccs811_bme280
 qwiic_ccs811_bme280: qwiic_ccs811_bme280.elf
 
-qwiic_ccs811_bme280.elf : $(OBJS) $(qwiic_ccs811_bme280_OBJS) 
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(qwiic_ccs811_bme280_OBJS) $(LDFLAGS)
+qwiic_ccs811_bme280.elf : $(qwiic_ccs811_bme280_OBJS) 
+	$(CXX) $(CXXFLAGS) -o $@ $(qwiic_ccs811_bme280_OBJS) $(LDFLAGS)
 
 qwiic_ms8607: MAP_NAME = qwiic_ms8607
 qwiic_ms8607: qwiic_ms8607.elf
 
-qwiic_ms8607.elf : $(OBJS) $(qwiic_ms8607_OBJS) 
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(qwiic_ms8607_OBJS) $(LDFLAGS)
+qwiic_ms8607.elf : $(qwiic_ms8607_OBJS) 
+	$(CXX) $(CXXFLAGS) -o $@ $(qwiic_ms8607_OBJS) $(LDFLAGS)
 
 qwiic_ccs811_bme280_sparkfun: MAP_NAME = qwiic_ccs811_bme280_sparkfun
 qwiic_ccs811_bme280_sparkfun: qwiic_ccs811_bme280_sparkfun.elf
 
-qwiic_ccs811_bme280_sparkfun.elf : $(OBJS) $(qwiic_ccs811_bme280_sparkfun_OBJS) 
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(qwiic_ccs811_bme280_sparkfun_OBJS) $(LDFLAGS)
+qwiic_ccs811_bme280_sparkfun.elf : $(qwiic_ccs811_bme280_sparkfun_OBJS) 
+	$(CXX) $(CXXFLAGS) -o $@ $(qwiic_ccs811_bme280_sparkfun_OBJS) $(LDFLAGS)
 
 qwiic_ms8607_sparkfun: MAP_NAME = qwiic_ms8607_sparkfun
 qwiic_ms8607_sparkfun: qwiic_ms8607_sparkfun.elf
 
-qwiic_ms8607_sparkfun.elf : $(OBJS) $(qwiic_ms8607_sparkfun_OBJS) 
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(qwiic_ms8607_sparkfun_OBJS) $(LDFLAGS)
-		
+qwiic_ms8607_sparkfun.elf : $(qwiic_ms8607_sparkfun_OBJS) 
+	$(CXX) $(CXXFLAGS) -o $@ $(qwiic_ms8607_sparkfun_OBJS) $(LDFLAGS)
+
+lora: MAP_NAME = lora
+lora: lora.elf
+
+lora.elf : $(TFOBJS) $(LORA_OBJS) 
+	$(CXX) $(CXXFLAGS) -o $@ $(TFOBJS) $(LORA_OBJS) $(LDFLAGS)
+
 clean:
 	@echo 'cleaning'
-	-@$(RM) $(OBJS) $(qwiic_ccs811_bme280_OBJS) $(qwiic_ms8607_OBJS) ${qwiic_ms8607_sparkfun_OBJS} ${qwiic_ccs811_bme280_sparkfun_OBJS}
+	-@$(RM) $(qwiic_ccs811_bme280_OBJS) $(qwiic_ms8607_OBJS) ${qwiic_ms8607_sparkfun_OBJS} ${qwiic_ccs811_bme280_sparkfun_OBJS} $(TFOBJS) $(LORA_OBJS)
 	-@$(RM) *.elf
 	-@$(RM) *.map
 	
-download: $(MODEL_LOC)
+download: 
 	@echo 'downloading'
 	@$(DL) $(SDK_LINK)  -o $(SDK_NAME)
 	@$(DL) $(TOOL_LINK)  -o $(TOOL_NAME)
 	@$(DL) $(DEPEND_LINK)  -o $(DEPEND_NAME)
+	@$(DL) $(TF_LINK) -o $(TF_NAME)
 	@$(UNZIP) -o $(SDK_NAME) -d $(SDK_LOC) 
 	@$(UNZIP) -o $(TOOL_NAME) -d $(TOOL_LOC)	
 	@$(UNZIP) -o $(DEPEND_NAME) -d $(DEPEND_LOC)
+	@$(UNZIP) -o $(TF_NAME) -d $(TF_LOC)
 	@$(RM) $(SDK_NAME)
 	@$(RM) $(TOOL_NAME)	
 	@$(RM) $(DEPEND_NAME)
+	@$(RM) $(TF_NAME)
+	@$(CP) "himax_tflm-master/tensorflow/" "./"
+	@$(RM) "himax_tflm-master"
+	@mkdir -p $(MODEL_LOC)
+	@$(DL) $(MODEL_LINK)  -o $(MODEL_NAME)
+	@$(UNZIP) -o $(MODEL_NAME) -d $(MODEL_LOC)
+	@$(RM) $(MODEL_NAME)
+	@$(DL) $(LIB_LINK)  -o $(LIB_NAME)  
+	@$(UNZIP) -o $(LIB_NAME) -d $(LIB_LOC)
+	@$(RM) $(LIB_NAME)
 	
-$(MODEL_LOC):
-	@mkdir -p $@
 
 ifeq ($(ARC_TOOLCHAIN), mwdt)
 flash:

@@ -23,7 +23,13 @@ Please check [here](https://docs.edgeimpulse.com/docs) to build your own Edge Im
 
 
 ## Export C++ library to repository
-- Head over to your Edge Impulse project, go to `Deployment` page, select `C++ library ` and click `Build` to download the `.zip` file of your project.
+- Head over to your Edge Impulse project, go to `Deployment` page, select `C++ library `. 
+
+![](images/deployment.png)
+
+- select `Quantized (int8)` and click `Build` to download the `.zip` file of your project.
+
+![](images/deployment_EON.png)
 
 - Extract the `.zip` file and copy the `edge-impulse-sdk` and `tflite-model` folders to this example folder, then your folder structure should look like this:
     ```
@@ -35,9 +41,30 @@ Please check [here](https://docs.edgeimpulse.com/docs) to build your own Edge Im
     |_Makefile
     |_README.md
     ```
+- Your folder structure of `bsp_tflu/HIMAX_WE1_EVB_example/scenario_app/edgeimpulse-example` should be looks like 
+
+![](images/folder_structure.png)
+
 
 ## Detection response
+There will be some modification to `main.cc` based on difference of the model you are using.
+In this example, we use image sensor as input. Change the image resolution in `main.cc` to fit data_acquisition on Edge Impulse web page.
+
+![main.cc about image resolution](images/image_res_in_main.png)
+
+![data_acquisition of Edge Impulse web page](images/data_acquisition.png)
+
+
+
+
 You can use the HIMAX WE1 SDK to operate the devices on HIMAX WE1 EVB (UART,GPIO,I2C,LED,...) to make the response to the detection. In this example, we make the response at the `RespondToDetection` function in the `main.cc` file:
+
+Since there are totally 4 gestures, we will get 4 scores in `score` array (score range will be +127~-128, higher value means higher possibility) and highest score index will be stored in the `maxindex`.
+
+![](images/scores_in_main.png)
+
+Based on `switch (maxindex)`, we make different response to gesture detected.
+
 ```c++
 switch (maxindex)
 {
@@ -57,6 +84,8 @@ switch (maxindex)
     ...
 }
 ```
+
+
 |case|LED GREEN|LED RED|GPIO|
 |----------|--|--|--|
 |0|off|off|- |

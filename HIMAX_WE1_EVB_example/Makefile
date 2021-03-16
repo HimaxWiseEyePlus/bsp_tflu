@@ -22,7 +22,7 @@ DL = curl -Ls -f
 UNZIP = unzip 
 CP = cp -r
 
-SDK_LINK = https://www.himax.com.tw/we-i/himax_we1_sdk_v17.zip
+SDK_LINK = https://www.himax.com.tw/we-i/himax_we1_sdk_v18.zip
 SDK_LOC = .
 SDK_NAME = sdk.zip
 
@@ -125,13 +125,13 @@ tensorflow/lite/kernels/kernel_util.cc \
 tensorflow/lite/micro/testing/test_utils.cc
 
 LORA_SRCS := \
+scenario_app/co2_person_lora_example/main.cc \
+scenario_app/co2_person_lora_example/main_functions.cc \
 tensorflow/lite/micro/kernels/arc_mli/scratch_buffers.cc \
 tensorflow/lite/micro/kernels/arc_mli/scratch_buf_mgr.cc \
 tensorflow/lite/micro/kernels/arc_mli/mli_slicers.cc \
 tensorflow/lite/micro/examples/person_detection_experimental/himax_we1_evb/image_provider.cc \
 tensorflow/lite/micro/examples/person_detection_experimental/model_settings.cc \
-scenario_app/lora/main.cc \
-scenario_app/lora/main_functions.cc \
 tensorflow/lite/micro/tools/make/downloads/person_model_int8/person_detect_model_data.cc
 
 qwiic_ccs811_bme280_SRCS := \
@@ -396,11 +396,11 @@ qwiic_ms8607_sparkfun: qwiic_ms8607_sparkfun.elf
 qwiic_ms8607_sparkfun.elf : $(qwiic_ms8607_sparkfun_OBJS) 
 	$(CXX) $(CXXFLAGS) -o $@ $(qwiic_ms8607_sparkfun_OBJS) $(LDFLAGS)
 
-lora: MAP_NAME = lora
-lora: lora.elf
+co2_person_lora_example: MAP_NAME = co2_person_lora_example
+co2_person_lora_example: co2_person_lora_example.elf
 
-lora.elf : $(TFOBJS) $(LORA_OBJS) 
-	$(CXX) $(CXXFLAGS) -o $@ $(TFOBJS) $(LORA_OBJS) $(LDFLAGS)
+co2_person_lora_example.elf : $(LORA_OBJS) ${TFOBJS}
+	$(CXX) $(CXXFLAGS) -o $@ $(LORA_OBJS) ${TFOBJS} $(LDFLAGS)
 
 clean:
 	@echo 'cleaning'

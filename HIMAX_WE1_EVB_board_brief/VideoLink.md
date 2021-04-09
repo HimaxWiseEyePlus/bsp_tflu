@@ -12,7 +12,7 @@
   - [AI Vision and Sensor Fusion with Himax & Edge Impulse](#edge-impulsehimax-webinar)
 
 - Workshop  
-  - [AI Workshop: What's That Smell? ](#ai-workshop:-what's-that-smell?)
+  - [AI Workshop: What's That Smell? ](#ai-workshop-whats-that-smell)
 
 - Tutorial
   - [Getting Started with the Himax WE-I Plus and Edge Impulse](https://www.hackster.io/gatoninja236/getting-started-with-the-himax-we-i-plus-and-edge-impulse-def88a)

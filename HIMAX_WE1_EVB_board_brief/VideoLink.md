@@ -11,6 +11,12 @@
 - Webinars
   - [AI Vision and Sensor Fusion with Himax & Edge Impulse](#edge-impulsehimax-webinar)
 
+- Workshop  
+  - [AI Workshop: What's That Smell? ](#ai-workshop:-what's-that-smell?)
+
+- Tutorial
+  - [Getting Started with the Himax WE-I Plus and Edge Impulse](https://www.hackster.io/gatoninja236/getting-started-with-the-himax-we-i-plus-and-edge-impulse-def88a)
+
 
 ## Google TFLu Person Detection example
 
@@ -31,3 +37,9 @@
 ## Edge Impulse/Himax Webinar
 
 [![Edge Impulse/Himax Webinar](images/Webinar.png)](https://www.youtube.com/watch?v=P6S4cgaSpVA&t=134s "Edge Impulse/Himax Webinar - Click to Watch!")
+
+## AI Workshop: What's That Smell?
+
+[![AI Workshop](images/ai_workshop_what_is_that_smell.png)](https://youtu.be/nMjVE7PzdGE#t=4m36s "AI Workshop: What's That Smell? - Click to Watch!")
+
+

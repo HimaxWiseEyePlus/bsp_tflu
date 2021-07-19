@@ -16,16 +16,16 @@ limitations under the License.
 #include "hx_drv_tflm.h"
 
 #include "scenario_app/co2_person_lora_example/main_functions.h"
-#include "tensorflow/lite/micro/examples/person_detection_experimental/image_provider.h"
-#include "tensorflow/lite/micro/examples/person_detection_experimental/model_settings.h"
-#include "tensorflow/lite/micro/examples/person_detection_experimental/person_detect_model_data.h"
+#include "tensorflow/lite/micro/examples/person_detection/image_provider.h"
+#include "tensorflow/lite/micro/examples/person_detection/model_settings.h"
+#include "tensorflow/lite/micro/examples/person_detection/person_detect_model_data.h"
 #include "scenario_app/co2_person_lora_example/settings.h"
 
 #include "tensorflow/lite/micro/micro_error_reporter.h"
 #include "tensorflow/lite/micro/micro_interpreter.h"
 #include "tensorflow/lite/micro/micro_mutable_op_resolver.h"
 #include "tensorflow/lite/schema/schema_generated.h"
-#include "tensorflow/lite/version.h"
+
 
 // Globals, used for compatibility with Arduino-style sketches.
 namespace

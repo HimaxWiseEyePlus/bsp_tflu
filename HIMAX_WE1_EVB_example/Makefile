@@ -1,8 +1,8 @@
 #=============================================================
 # Toolchain definitions
 #=============================================================
-ARC_TOOLCHAIN ?= mwdt
-#ARC_TOOLCHAIN ?= gnu
+#ARC_TOOLCHAIN ?= mwdt
+ARC_TOOLCHAIN ?= gnu
 
 ifeq ($(ARC_TOOLCHAIN), mwdt)
 	CC = ccac
@@ -38,11 +38,11 @@ TF_LINK = https://github.com/HimaxWiseEyePlus/himax_tflm/archive/master.zip
 TF_LOC = ./
 TF_NAME = himax_tflm.zip
 
-MODEL_LINK = https://www.himax.com.tw/we-i/himax_tflu_tree/model_setting_v02.zip
+MODEL_LINK = https://www.himax.com.tw/we-i/himax_tflu_tree/model_setting_v03.zip
 MODEL_LOC = tensorflow/lite/micro/tools/make/downloads/
 MODEL_NAME = model.zip
 
-LIB_LINK = https://www.himax.com.tw/we-i/himax_tflu_tree/thrid_party_lib_v01.zip
+LIB_LINK = https://www.himax.com.tw/we-i/himax_tflu_tree/third_party_lib_v03.zip
 LIB_LOC = third_party/
 LIB_NAME = lib.zip
 
@@ -57,11 +57,12 @@ endif
 #=============================================================
 
 TFSRCS := \
-tensorflow/lite/micro/micro_interpreter.cc \
-tensorflow/lite/micro/all_ops_resolver.cc \
 tensorflow/lite/micro/simple_memory_allocator.cc \
+tensorflow/lite/micro/mock_micro_graph.cc \
+tensorflow/lite/micro/micro_allocator.cc \
+tensorflow/lite/micro/all_ops_resolver.cc \
 tensorflow/lite/micro/memory_helpers.cc \
-tensorflow/lite/micro/recording_micro_allocator.cc \
+tensorflow/lite/micro/micro_interpreter.cc \
 tensorflow/lite/micro/micro_error_reporter.cc \
 tensorflow/lite/micro/micro_time.cc \
 tensorflow/lite/micro/recording_simple_memory_allocator.cc \
@@ -69,52 +70,12 @@ tensorflow/lite/micro/micro_string.cc \
 tensorflow/lite/micro/micro_profiler.cc \
 tensorflow/lite/micro/micro_utils.cc \
 tensorflow/lite/micro/himax_we1_evb/debug_log.cc \
-tensorflow/lite/micro/micro_optional_debug_tools.cc \
 tensorflow/lite/micro/test_helpers.cc \
-tensorflow/lite/micro/micro_allocator.cc \
-tensorflow/lite/micro/benchmarks/keyword_scrambled_model_data.cc \
-tensorflow/lite/micro/kernels/logistic.cc \
-tensorflow/lite/micro/kernels/arc_mli/conv.cc \
-tensorflow/lite/micro/kernels/prelu.cc \
-tensorflow/lite/micro/kernels/dequantize.cc \
-tensorflow/lite/micro/kernels/l2norm.cc \
-tensorflow/lite/micro/kernels/resize_nearest_neighbor.cc \
-tensorflow/lite/micro/kernels/tanh.cc \
-tensorflow/lite/micro/kernels/activations.cc \
-tensorflow/lite/micro/kernels/arg_min_max.cc \
-tensorflow/lite/micro/kernels/pad.cc \
-tensorflow/lite/micro/kernels/reduce.cc \
-tensorflow/lite/micro/kernels/unpack.cc \
-tensorflow/lite/micro/kernels/sub.cc \
-tensorflow/lite/micro/kernels/add.cc \
-tensorflow/lite/micro/kernels/split.cc \
-tensorflow/lite/micro/kernels/circular_buffer.cc \
-tensorflow/lite/micro/kernels/kernel_runner.cc \
-tensorflow/lite/micro/kernels/floor.cc \
-tensorflow/lite/micro/kernels/round.cc \
-tensorflow/lite/micro/kernels/ceil.cc \
-tensorflow/lite/micro/kernels/svdf.cc \
-tensorflow/lite/micro/kernels/hard_swish.cc \
-tensorflow/lite/micro/kernels/arc_mli/pooling.cc \
-tensorflow/lite/micro/kernels/concatenation.cc \
-tensorflow/lite/micro/kernels/neg.cc \
-tensorflow/lite/micro/kernels/quantize.cc \
-tensorflow/lite/micro/kernels/ethosu.cc \
-tensorflow/lite/micro/kernels/mul.cc \
-tensorflow/lite/micro/kernels/maximum_minimum.cc \
-tensorflow/lite/micro/kernels/reshape.cc \
-tensorflow/lite/micro/kernels/strided_slice.cc \
-tensorflow/lite/micro/kernels/softmax.cc \
-tensorflow/lite/micro/kernels/pack.cc \
-tensorflow/lite/micro/kernels/kernel_util.cc \
-tensorflow/lite/micro/kernels/logical.cc \
-tensorflow/lite/micro/kernels/elementwise.cc \
-tensorflow/lite/micro/kernels/comparisons.cc \
-tensorflow/lite/micro/kernels/arc_mli/fully_connected.cc \
-tensorflow/lite/micro/kernels/arc_mli/depthwise_conv.cc \
+tensorflow/lite/micro/micro_graph.cc \
+tensorflow/lite/micro/system_setup.cc \
+tensorflow/lite/micro/recording_micro_allocator.cc \
 tensorflow/lite/micro/memory_planner/linear_memory_planner.cc \
 tensorflow/lite/micro/memory_planner/greedy_memory_planner.cc \
-tensorflow/lite/micro/testing/test_conv_model.cc \
 tensorflow/lite/c/common.c \
 tensorflow/lite/core/api/error_reporter.cc \
 tensorflow/lite/core/api/flatbuffer_conversions.cc \
@@ -122,7 +83,78 @@ tensorflow/lite/core/api/op_resolver.cc \
 tensorflow/lite/core/api/tensor_utils.cc \
 tensorflow/lite/kernels/internal/quantization_util.cc \
 tensorflow/lite/kernels/kernel_util.cc \
-tensorflow/lite/micro/testing/test_utils.cc
+tensorflow/lite/schema/schema_utils.cc \
+tensorflow/lite/micro/kernels/activations.cc \
+tensorflow/lite/micro/kernels/add.cc \
+tensorflow/lite/micro/kernels/add_n.cc \
+tensorflow/lite/micro/kernels/arg_min_max.cc \
+tensorflow/lite/micro/kernels/batch_to_space_nd.cc \
+tensorflow/lite/micro/kernels/cast.cc \
+tensorflow/lite/micro/kernels/ceil.cc \
+tensorflow/lite/micro/kernels/circular_buffer.cc \
+tensorflow/lite/micro/kernels/comparisons.cc \
+tensorflow/lite/micro/kernels/concatenation.cc \
+tensorflow/lite/micro/kernels/arc_mli/conv.cc \
+tensorflow/lite/micro/kernels/conv_common.cc \
+tensorflow/lite/micro/kernels/cumsum.cc \
+tensorflow/lite/micro/kernels/depth_to_space.cc \
+tensorflow/lite/micro/kernels/arc_mli/depthwise_conv.cc \
+tensorflow/lite/micro/kernels/depthwise_conv_common.cc \
+tensorflow/lite/micro/kernels/dequantize.cc \
+tensorflow/lite/micro/kernels/detection_postprocess.cc \
+tensorflow/lite/micro/kernels/elementwise.cc \
+tensorflow/lite/micro/kernels/elu.cc \
+tensorflow/lite/micro/kernels/ethosu.cc \
+tensorflow/lite/micro/kernels/exp.cc \
+tensorflow/lite/micro/kernels/expand_dims.cc \
+tensorflow/lite/micro/kernels/fill.cc \
+tensorflow/lite/micro/kernels/floor.cc \
+tensorflow/lite/micro/kernels/floor_div.cc \
+tensorflow/lite/micro/kernels/floor_mod.cc \
+tensorflow/lite/micro/kernels/arc_mli/fully_connected.cc \
+tensorflow/lite/micro/kernels/fully_connected_common.cc \
+tensorflow/lite/micro/kernels/gather.cc \
+tensorflow/lite/micro/kernels/gather_nd.cc \
+tensorflow/lite/micro/kernels/hard_swish.cc \
+tensorflow/lite/micro/kernels/if.cc \
+tensorflow/lite/micro/kernels/kernel_runner.cc \
+tensorflow/lite/micro/kernels/kernel_util.cc \
+tensorflow/lite/micro/kernels/l2norm.cc \
+tensorflow/lite/micro/kernels/l2_pool_2d.cc \
+tensorflow/lite/micro/kernels/leaky_relu.cc \
+tensorflow/lite/micro/kernels/logical.cc \
+tensorflow/lite/micro/kernels/logistic.cc \
+tensorflow/lite/micro/kernels/log_softmax.cc \
+tensorflow/lite/micro/kernels/maximum_minimum.cc \
+tensorflow/lite/micro/kernels/mul.cc \
+tensorflow/lite/micro/kernels/neg.cc \
+tensorflow/lite/micro/kernels/pack.cc \
+tensorflow/lite/micro/kernels/pad.cc \
+tensorflow/lite/micro/kernels/arc_mli/pooling.cc \
+tensorflow/lite/micro/kernels/prelu.cc \
+tensorflow/lite/micro/kernels/quantize.cc \
+tensorflow/lite/micro/kernels/quantize_common.cc \
+tensorflow/lite/micro/kernels/reduce.cc \
+tensorflow/lite/micro/kernels/reshape.cc \
+tensorflow/lite/micro/kernels/resize_bilinear.cc \
+tensorflow/lite/micro/kernels/resize_nearest_neighbor.cc \
+tensorflow/lite/micro/kernels/round.cc \
+tensorflow/lite/micro/kernels/shape.cc \
+tensorflow/lite/micro/kernels/softmax.cc \
+tensorflow/lite/micro/kernels/softmax_common.cc \
+tensorflow/lite/micro/kernels/space_to_batch_nd.cc \
+tensorflow/lite/micro/kernels/split.cc \
+tensorflow/lite/micro/kernels/split_v.cc \
+tensorflow/lite/micro/kernels/squeeze.cc \
+tensorflow/lite/micro/kernels/strided_slice.cc \
+tensorflow/lite/micro/kernels/sub.cc \
+tensorflow/lite/micro/kernels/svdf.cc \
+tensorflow/lite/micro/kernels/svdf_common.cc \
+tensorflow/lite/micro/kernels/tanh.cc \
+tensorflow/lite/micro/kernels/transpose.cc \
+tensorflow/lite/micro/kernels/transpose_conv.cc \
+tensorflow/lite/micro/kernels/unpack.cc \
+tensorflow/lite/micro/kernels/zeros_like.cc 
 
 LORA_SRCS := \
 scenario_app/co2_person_lora_example/main.cc \
@@ -130,8 +162,8 @@ scenario_app/co2_person_lora_example/main_functions.cc \
 tensorflow/lite/micro/kernels/arc_mli/scratch_buffers.cc \
 tensorflow/lite/micro/kernels/arc_mli/scratch_buf_mgr.cc \
 tensorflow/lite/micro/kernels/arc_mli/mli_slicers.cc \
-tensorflow/lite/micro/examples/person_detection_experimental/himax_we1_evb/image_provider.cc \
-tensorflow/lite/micro/examples/person_detection_experimental/model_settings.cc \
+tensorflow/lite/micro/examples/person_detection/himax_we1_evb/image_provider.cc \
+tensorflow/lite/micro/examples/person_detection/model_settings.cc \
 tensorflow/lite/micro/tools/make/downloads/person_model_int8/person_detect_model_data.cc
 
 qwiic_ccs811_bme280_SRCS := \
@@ -260,6 +292,7 @@ $(SDK_PATH)/liblibtflm.a
 else ifeq ($(ARC_TOOLCHAIN), gnu)
 CXXFLAGS += \
 -fno-rtti \
+-fpermissive \
 -fno-exceptions \
 -fno-threadsafe-statics \
 -fno-unwind-tables \

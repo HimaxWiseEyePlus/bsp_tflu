@@ -22,13 +22,17 @@ source and one built version are placed in the directory.
   the compiler can be installed by 
 
   ```
+  sudo apt install g++
   sudo apt update
   sudo apt install build-essential
   ```
 
 - FT4222 Linux driver
   1. Download FT4222 Linux driver [here](https://www.ftdichip.com/Support/SoftwareExamples/libft4222-linux-1.4.4.9.tgz).
-  2. Type `install4222.sh` to install the FT4222 driver.
+  2. To install the FT4222 driver
+    ```
+    sudo ./install4222.sh
+    ```
   3. Assign access right to a USB device, go to the directory 
 
     ```
@@ -50,7 +54,7 @@ In handwriting example, sensor images with JPG format and handwriting result as 
 1. follow the [steps](https://github.com/HimaxWiseEyePlus/himax_tflm#deploy-to-himax-we1-evb) to burn handwriting example into HIMAX_WE1_EVB
 2. In Linux environment, type 
     ```
-    WEI_SPIrecvImg 30
+    ./WEI_SPIrecvImg 30
     ```
     to receive 30 data. It should be 15 images and 15 handwriting results, each data will be placed with filename 'default[no].dat'.
 

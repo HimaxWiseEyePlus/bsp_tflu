@@ -55,4 +55,6 @@ It is a command-line tool to generate image file for HIMAX_WE1_EVB. The tool has
   - You will generate output image files.
     ![alt text](images/meta_yolo_image.PNG)
 
+- To find more detail about flash image update, please refer to [here](https://github.com/HimaxWiseEyePlus/bsp_tflu/tree/master/HIMAX_WE1_EVB_user_guide#flash-image-update-at-windows-environment)
+
 

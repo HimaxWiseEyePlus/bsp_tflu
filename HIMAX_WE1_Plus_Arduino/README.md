@@ -41,7 +41,7 @@ Plug HIMAX WE-I EVB to USB port and Let's go
 3. (Ubuntu) If you see this message, please add permission for serial port. 
 
     ![alt text](images/serial_permission.png)
-4. Follows steps in Arduino [link] (https://www.arduino.cc/en/Guide/Linux) to add serial permission, maybe reboot is needed after permission added.
+4. Follows steps in Arduino [link](https://www.arduino.cc/en/Guide/Linux) to add serial permission, maybe reboot is needed after permission added.
 
     ![alt text](images/add_serial_permission.png)
 
@@ -76,7 +76,7 @@ After upload and run example - magic_wand, try to perform following gestures `Wi
 
 ## Examples - Micro Speech
 
-After upload and run example - micro_speech, try to say`yes` or `no` command and you can see the otuput in serial terminal.
+After upload and run example - micro_speech, try to say `yes` or `no` command and you can see the otuput in serial terminal.
  
 ![alt text](images/micro_speech_message.png)
 

@@ -66,7 +66,7 @@ To use SPI, let's take Handwriting as an example, HIMAX_WE1_EVB will need to ini
 
 ![](images/spi_init_send_image.png)
 
-To check more details, jpeg image out code [here](https://github.com/HimaxWiseEyePlus/himax_tflm/blob/master/tensorflow/lite/micro/examples/handwriting/himax_we1_evb/image_provider.cc) and meta-data code [here](https://github.com/HimaxWiseEyePlus/himax_tflm/blob/master/tensorflow/lite/micro/examples/handwriting/himax_we1_evb/detection_responder.cc)
+To check more details, jpeg image out code [here](https://github.com/HimaxWiseEyePlus/himax_tflm/blob/master/examples/handwriting/himax_we1_evb/image_provider.cc) and meta-data code [here](https://github.com/HimaxWiseEyePlus/himax_tflm/blob/master/examples/handwriting/himax_we1_evb/detection_responder.cc)
 
 
 

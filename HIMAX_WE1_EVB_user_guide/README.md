@@ -195,7 +195,7 @@ You can see the generated application flash image name with suffix "_0.img", "_1
 ### TFLM Example Hello World
 
   To generate hello world example flash binary for HIMAX WE1 EVB:
-  1. Based on the flow of [hello world example](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/hello_world#hello-world-example) to generate flash image. 
+  1. Based on the flow of [hello world example](https://github.com/HimaxWiseEyePlus/tensorflow/tree/master/tensorflow/lite/micro/examples/hello_world#deploy-to-himax-we1-evb) to generate flash image. 
   2. Download image binary to HIMAX WE1 EVB, detail steps can be found at [flash image update](#flash-image-update).
   3. Hello world example message will be shown on the terminal application. 
 
@@ -204,7 +204,7 @@ You can see the generated application flash image name with suffix "_0.img", "_1
 ### TFLM Example Person Detection INT8
 
   To generate person detection example flash binary for HIMAX WE1 EVB:
-  1. Based on the flow of [person detection example](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/person_detection_experimental#person-detection-example) to generate flash image. 
+  1. Based on the flow of [person detection example](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/person_detection#person-detection-example) and [Himax person detection example](https://github.com/HimaxWiseEyePlus/himax_tflm#deploy-to-himax-we1-evb) to generate flash image. 
   2. Download image binary to HIMAX WE1 EVB, detail steps can be found at [flash image update](#flash-image-update).
   3. Person detection example message will be shown on the terminal application. 
 
@@ -217,7 +217,7 @@ You can see the generated application flash image name with suffix "_0.img", "_1
 ### TFLM Example Micro Speech INT8
 
   To generate micro speech example flash binary for HIMAX WE1 EVB:
-  1. Based on the flow of [micro speech example](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/micro_speech#micro-speech-example) to generate flash image. 
+  1. Based on the flow of [micro speech example](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/micro_speech#micro-speech-example) and [Himax micro speech example](https://github.com/HimaxWiseEyePlus/himax_tflm#deploy-to-himax-we1-evb) to generate flash image. 
   2. Download image binary to HIMAX WE1 EVB, detail steps can be found at [flash image update](#flash-image-update).
   3. Micro speech example message will be shown on the terminal application with LED flickering. 
 
@@ -232,7 +232,7 @@ You can see the generated application flash image name with suffix "_0.img", "_1
 ### TFLM Example Magic Wand
 
   To generate magic wand example flash binary for HIMAX WE1 EVB:
-  1. Based on the flow of [magic wand example](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/magic_wand#magic-wand-example) to generate flash image. 
+  1. Based on the flow of [magic wand example](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/magic_wand#magic-wand-example) and [Himax magic wand example](https://github.com/HimaxWiseEyePlus/himax_tflm#deploy-to-himax-we1-evb) to generate flash image. 
   2. Download image binary to HIMAX WE1 EVB, detail steps can be found at [flash image update](#flash-image-update).
   3. Magic wand example message will be shown on the terminal application. 
   4. There are 3 gestures supported in magic wand example. 

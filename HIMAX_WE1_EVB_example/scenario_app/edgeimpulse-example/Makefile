@@ -23,6 +23,7 @@ $(wildcard edge-impulse-sdk/tensorflow/lite/c/*.c) \
 $(wildcard edge-impulse-sdk/tensorflow/lite/kernels/internal/*.cc) \
 $(wildcard edge-impulse-sdk/tensorflow/lite/kernels/*.cc) \
 $(wildcard edge-impulse-sdk/tensorflow/lite/micro/kernels/arc_mli/*.cc) \
+$(wildcard edge-impulse-sdk/porting/himax/*.cpp) \
 $(wildcard tflite-model/*.cpp) \
 
 SRC := \

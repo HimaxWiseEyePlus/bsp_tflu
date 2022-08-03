@@ -14,3 +14,24 @@ We deployed person detection model with Synopsys MLI optimized kernels on WE-I P
 The model inference time is `35ms`. The measured average power is just `2.5mW` per frame per second, including WE-I Plus ASIC and `HM0360` sensor.
 
 [![person_detect](images/person_detect.png)](https://www.youtube.com/watch?v=DQQWAPrrWlE "person_detect - Click to Watch!")
+
+## 1FPS person detection on WE-I Plus
+
+There is another use case that WE-I Plus is in sleep mode and wakeup every second. During the time wakeup, it retrieves one sensor image, do person detection and back to sleep. Following are the deatailed power consumption information and related power consumption waveform.
+
+- Model and use case
+  -  TfLu 'person detection' INT8 model 
+     -  image size : `96x96`
+     -  weight size : `250KB`
+     -  Ops/inference : `60M`
+  -  use case scenario
+     -  1FPS periodic wakeup 
+
+- Measured result (VGA sensor included)
+  - Average power consumpution : `2.5mW` 
+  - Peak power consumpution : `43.6mW`
+  - Model inference time : `35ms`
+  - Battery Life (CR2032, 235mAh@3V) : `10.5 days`
+ 
+![board for power measurement](images/person_detect_power.png)
+

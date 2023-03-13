@@ -33,7 +33,10 @@ int main(int argc, char *argv[])
 {
     // initial uart
     hx_drv_uart_initial(UART_BR_115200);
-    
+    pimg_config.sensor_type = HX_DRV_SENSOR_TYPE_HM0360_MONO;
+    pimg_config.format = HX_DRV_VIDEO_FORMAT_YUV400;
+    pimg_config.img_width = 640;
+    pimg_config.img_height = 480;
     if (hx_drv_sensor_initial(&pimg_config) != HX_DRV_LIB_PASS)
     {
         hx_drv_uart_print("Sensor initial fail.");

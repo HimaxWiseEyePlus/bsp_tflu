@@ -81,7 +81,8 @@ CXXFLAGS += \
 -I./edge-impulse-sdk/third_party/flatbuffers/include/ \
 -I./edge-impulse-sdk/third_party/gemmlowp/ \
 -I./edge-impulse-sdk/third_party/ruy/ \
--I../../third_party/arc_mli_package/include/ \
+-I./edge-impulse-sdk/third_party/arc_mli_package/include/ \
+
 
 
 CCFLAGS+= \
@@ -115,7 +116,7 @@ CCFLAGS+= \
 -I./edge-impulse-sdk/third_party/flatbuffers/include/ \
 -I./edge-impulse-sdk/third_party/gemmlowp/ \
 -I./edge-impulse-sdk/third_party/ruy/ \
--I../../third_party/arc_mli_package/include/ \
+-I../third_party/arc_mli_package/include/  \
 
 
 LDFLAGS +=  -Wl,-lmli -Wl,-lmwdepend -Wl,-marcv2elfx -Wl,-Map=memory.map -Wl,--strip-debug -Wl,--stats,--gc-sections -Wl,--cref \
@@ -131,6 +132,7 @@ $(SDK_PATH)/liblibcommon.a \
 $(SDK_PATH)/liblibaudio.a \
 $(SDK_PATH)/liblibsecurity.a \
 $(SDK_PATH)/liblibsensordp.a \
+$(SDK_PATH)/liblibclib.a \
 $(SDK_PATH)/liblibtflm.a \
 -Wl,--end-group \
 

@@ -16,9 +16,9 @@ limitations under the License.
 #include "hx_drv_tflm.h"
 
 #include "scenario_app/co2_person_lora_example/main_functions.h"
-#include "tensorflow/lite/micro/examples/person_detection/image_provider.h"
-#include "tensorflow/lite/micro/examples/person_detection/model_settings.h"
-#include "tensorflow/lite/micro/examples/person_detection/person_detect_model_data.h"
+#include "examples/person_detection/image_provider.h"
+#include "examples/person_detection/model_settings.h"
+#include "examples/person_detection/person_detect_model_data.h"
 #include "scenario_app/co2_person_lora_example/settings.h"
 
 #include "tensorflow/lite/micro/micro_error_reporter.h"

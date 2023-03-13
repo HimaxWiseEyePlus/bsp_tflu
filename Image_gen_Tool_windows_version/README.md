@@ -1,4 +1,4 @@
-# Image gen tool Windows version v2.1.11 for HIMAX_WE1_EVB 
+# Image gen tool Windows version v2.1.12 for HIMAX_WE1_EVB 
 It is a command-line tool to generate image file for HIMAX_WE1_EVB. The tool has been built by python and tested in Windows 10 version 1909.
 
 ## Table of contents
@@ -6,12 +6,12 @@ It is a command-line tool to generate image file for HIMAX_WE1_EVB. The tool has
   - [Example](#Example)
 
 ## Image gen tool
-- Image tool version: v2.1.11
+- Image tool version: v2.1.12
 - How to generate image file?
-  - Use cmd to open image_gen_window_v2_1_11 folder. 
+  - Use cmd to open image_gen_window_v2_1_12 folder. 
     - The folder will be like following image.
       ![alt text](images/folder_image.PNG)
-  - Put your own elf, tflite and map files which you made at first under image_gen_window_v2_1_11 folder.
+  - Put your own elf, tflite and map files which you made at first under image_gen_window_v2_1_12 folder.
       ![alt text](images/put_file.PNG)
   - GNU version
     - key-in following command on your cmd

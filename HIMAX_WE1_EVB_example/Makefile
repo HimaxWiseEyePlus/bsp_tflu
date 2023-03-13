@@ -244,9 +244,9 @@ CXXFLAGS+= \
 -DTF_LITE_DISABLE_X86_NEON \
 -Wstrict-aliasing \
 -DTF_LITE_STATIC_MEMORY \
--Werror \
+-Wno-error \
 -Wsign-compare \
--Wdouble-promotion \
+-Wno-double-promotion \
 -Wshadow \
 -Wunused-variable \
 -Wmissing-field-initializers \
@@ -255,7 +255,6 @@ CXXFLAGS+= \
 -O3 \
 -fno-rtti \
 -DSCRATCH_MEM_Z_SIZE=0x10000 \
--DNDEBUG \
 -g \
 -DCPU_ARC \
 -Hnosdata \
@@ -273,6 +272,7 @@ CXXFLAGS+= \
 -tcf_core_config \
 -I. \
 -I./$(SDK_PATH) \
+-I./$(LIB_PATH) \
 -I./third_party/gemmlowp \
 -I./third_party/flatbuffers/include \
 -I./third_party/ruy \
@@ -283,7 +283,10 @@ CXXFLAGS+= \
 
 CCFLAGS+= \
 -Wimplicit-function-declaration \
--Werror -fno-unwind-tables \
+-Wno-double-promotion \
+-Wshadow \
+-Wno-error \
+-fno-unwind-tables \
 -ffunction-sections \
 -fdata-sections \
 -fmessage-length=0 \
@@ -307,7 +310,8 @@ CCFLAGS+= \
 -fdata-sections \
 -tcf_core_config \
 -I. \
--I. $(SDK_PATH)\
+-I./$(SDK_PATH)\
+-I./$(LIB_PATH) \
 -I./third_party/gemmlowp \
 -I./third_party/flatbuffers/include \
 -I./third_party/ruy \
@@ -315,6 +319,7 @@ CCFLAGS+= \
 -I./third_party/arc_mli_package/include/api \
 -I./third_party/kissfft \
 -I./third_party/kissfft/tools
+
 
 LDFLAGS+= \
 -buildlib \
@@ -375,6 +380,7 @@ CXXFLAGS += \
 -mfpu=fpus_all \
 -I. \
 -I./$(SDK_PATH) \
+-I./$(LIB_PATH) \
 -I./third_party/gemmlowp \
 -I./third_party/flatbuffers/include \
 -I./third_party/ruy \
@@ -406,6 +412,7 @@ CCFLAGS+= \
 -include $(SDK_PATH)/core_config.h \
 -I. \
 -I./$(SDK_PATH) \
+-I./$(LIB_PATH) \
 -I./third_party/gemmlowp \
 -I./third_party/flatbuffers/include \
 -I./third_party/ruy \
